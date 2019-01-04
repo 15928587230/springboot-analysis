@@ -1,4 +1,4 @@
-package owinfo.analysis.Resource;
+package owinfo.analysis._1Resource;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.UrlResource;
@@ -50,7 +50,7 @@ public class MyResourceUtilTest {
      * @return
      */
     public URL getUrl(@Nullable String resourceLocation) throws FileNotFoundException {
-        Assert.notNull(resourceLocation, "Resource location can not be null");
+        Assert.notNull(resourceLocation, "_1Resource location can not be null");
         if (resourceLocation.startsWith("classpath:")) {
             String path = resourceLocation.substring("classpath:".length());
             return ClassUtils.getDefaultClassLoader().getResource(path);
@@ -61,7 +61,7 @@ public class MyResourceUtilTest {
                 try {
                     return (new File(resourceLocation)).toURI().toURL();
                 } catch (MalformedURLException e1) {
-                    throw new FileNotFoundException("Resource can not be found");
+                    throw new FileNotFoundException("_1Resource can not be found");
                 }
             }
         }
