@@ -5,10 +5,10 @@ import java.util.EventObject;
 
 public interface MyEventListener extends EventListener{
 
-    public void update(EventObject eventObject);
+    void update(EventObject eventObject);
 }
 
-class SendEmailListener implements MyEventListener {
+class SendListener implements MyEventListener {
 
     @Override
     public void update(EventObject eventObject) {

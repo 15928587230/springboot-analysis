@@ -42,8 +42,9 @@ public class MyEventSource  {
 
     /**
      * 通知观察者
+     * 根据不同的处理方式，发送不同的事件给观察者
      */
-    public void notifyListeners(String message) {
+    public void sendEmail(String message) {
         System.out.println("事件源：" + message);
         Iterator<MyEventListener> iterator = listeners.iterator();
         while (iterator.hasNext()) {
@@ -51,11 +52,24 @@ public class MyEventSource  {
         }
     }
 
+    /**
+     * 通知观察者
+     * 根据不同的处理方式，发送不同的事件给观察者
+     */
+    public void sendSms(String message) {
+        System.out.println("事件源：" + message);
+        Iterator<MyEventListener> iterator = listeners.iterator();
+        while (iterator.hasNext()) {
+            iterator.next().update(new SendSmsEvent(message));
+        }
+    }
+
     public static void main(String[] args) {
-        MyEventListener listener = new SendEmailListener();
+        MyEventListener listener = new SendListener();
         MyEventSource eventSource = new MyEventSource();
         eventSource.addListener(listener);
-        eventSource.notifyListeners("更新了一条消息");
+        eventSource.sendEmail("发送了一封邮件");
+        eventSource.sendSms("发送了一条短信");
     }
 }
 
