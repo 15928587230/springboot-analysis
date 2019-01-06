@@ -15,27 +15,8 @@ public class SpringEventSource implements Serializable{
     private String msgId;
     private String msg;
 
-    public SpringEventSource() {
-    }
-
     public SpringEventSource(String msgId, String msg) {
         this.msgId = msgId;
-        this.msg = msg;
-    }
-
-    public String getMsgId() {
-        return msgId;
-    }
-
-    public void setMsgId(String msgId) {
-        this.msgId = msgId;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
         this.msg = msg;
     }
 

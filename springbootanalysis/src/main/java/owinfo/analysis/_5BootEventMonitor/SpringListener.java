@@ -18,7 +18,7 @@ class SpringStartingListener implements SpringListener {
          *  只监听Starting事件
          */
         if (springEvent instanceof SpringStartingEvent) {
-            System.out.println("Spring starting listener...");
+            System.out.println(springEvent.getSource() + "Spring starting listener...");
         }
     }
 }
@@ -31,7 +31,7 @@ class SpringPrepareListener implements SpringListener {
          *  只监听prepare事件
          */
         if (springEvent instanceof SpringPrepareEvent) {
-            System.out.println("Spring prepare listener...");
+            System.out.println(springEvent.getSource() + "Spring prepare listener...");
         }
     }
 }
@@ -44,7 +44,7 @@ class SpringRunningListener implements SpringListener {
     @Override
     public void onRun(SpringEvent springEvent) {
         if (springEvent instanceof SpringRunningEvent) {
-            System.out.println("Spring running listener...");
+            System.out.println(springEvent.getSource() + "Spring running listener...");
         }
     }
 }
@@ -57,7 +57,7 @@ class SpringClosedListener implements SpringListener {
     @Override
     public void onRun(SpringEvent springEvent) {
         if (springEvent instanceof SpringClosedEvent) {
-            System.out.println("Spring closed listener...");
+            System.out.println(springEvent.getSource() + "Spring closed listener...");
         }
     }
 }
