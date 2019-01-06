@@ -14,7 +14,7 @@ public interface MyEventListener extends EventListener{
 class SendListener implements MyEventListener {
 
     /**
-     *  更具观察者不同，执行不同的业务
+     *  根据观察者不同，执行不同的业务
      */
     @Override
     public void update(EventObject eventObject) {
