@@ -1,5 +1,9 @@
 package owinfo.analysis._6ReflectGeneric.GenericTest;
 
+import org.springframework.core.ResolvableType;
+import owinfo.analysis._6ReflectGeneric.ReflectParentTest;
+import owinfo.analysis._6ReflectGeneric.ReflectTest;
+
 import java.lang.reflect.*;
 import java.util.List;
 import java.util.Map;
@@ -73,7 +77,15 @@ public class GenericTest<T extends GenericTest> extends Object{
         }
 
 
+        /**
+         *  Springboot ResolvableType是对泛型的一种包装，表示一种类或者接口等等的类型
+         *  同样提供了获取Field、Method、Class、Type的方法，并且使用起来更加简单
+         */
         boolean assignableFrom = Object.class.isAssignableFrom(GenericTest.class);
-        System.out.println("Object是GenericTest的父类" + assignableFrom);
+        System.out.println("Object是GenericTest的父类" + assignableFrom); //true
+
+        ResolvableType resolvableType = ResolvableType.forClass(ReflectParentTest.class);
+        boolean assignable = resolvableType.isAssignableFrom(ReflectTest.class);
+        System.out.println("ReflectParentTest是ReflectTest的父类" + assignable); //true
     }
 }
