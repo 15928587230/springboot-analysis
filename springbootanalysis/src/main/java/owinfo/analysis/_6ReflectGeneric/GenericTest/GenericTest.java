@@ -71,5 +71,9 @@ public class GenericTest<T extends GenericTest> extends Object{
             System.out.println(typeVariable.getName()); //T
             System.out.println(typeVariable.getBounds()[0].getTypeName());//上边界GenericTest
         }
+
+
+        boolean assignableFrom = Object.class.isAssignableFrom(GenericTest.class);
+        System.out.println("Object是GenericTest的父类" + assignableFrom);
     }
 }
