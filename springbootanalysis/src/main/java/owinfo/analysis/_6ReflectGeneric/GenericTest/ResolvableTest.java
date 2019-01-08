@@ -61,13 +61,13 @@ public class ResolvableTest<T extends ResolvableType, D extends ReflectTest> {
         if (type instanceof Class) {
             TypeVariable[] typeVariables = ((Class) type).getTypeParameters();
             resolvableTypes = new ResolvableType[typeVariables.length];
-            fillIn(resolvableTypes, typeVariables);
+            resolveTypes(resolvableTypes, typeVariables);
 
         } else if (type instanceof ParameterizedType) {
             Type[] typeArguments = ((ParameterizedType) type).getActualTypeArguments();
             resolvableTypes = new ResolvableType[typeArguments.length];
 
-            fillIn(resolvableTypes, typeArguments);
+            resolveTypes(resolvableTypes, typeArguments);
         } else if (type instanceof GenericArrayType){
             Type componentType = ((GenericArrayType) type).getGenericComponentType();
             resolvableTypes = new ResolvableType[1];
@@ -79,7 +79,7 @@ public class ResolvableTest<T extends ResolvableType, D extends ReflectTest> {
         return resolvableTypes;
     }
 
-    public static void fillIn(ResolvableType[] resolvableTypes, Type[] types) {
+    public static void resolveTypes(ResolvableType[] resolvableTypes, Type[] types) {
         for (int i = 0; i < types.length; i++) {
             resolvableTypes[i] = ResolvableType.forType(types[i]);
         }
