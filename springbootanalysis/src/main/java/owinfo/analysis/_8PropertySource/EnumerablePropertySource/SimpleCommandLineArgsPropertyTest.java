@@ -1,6 +1,11 @@
 package owinfo.analysis._8PropertySource.EnumerablePropertySource;
 
+import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.SimpleCommandLinePropertySource;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * @see org.springframework.core.env.SimpleCommandLineArgsParser
@@ -30,5 +35,13 @@ public class SimpleCommandLineArgsPropertyTest {
             System.out.println(propertyNames[i]);
             System.out.println(commandLineArgs.getProperty(propertyNames[i]));
         }
+
+
+        Map<String, Object> map = new HashMap<>();
+        map.put(null, "pjj");
+        map.put("age", 23);
+        MapPropertySource mapPropertySource = new MapPropertySource("mapProperties", map);
+        System.out.println(mapPropertySource.getProperty(null));//pjj
+        System.out.println(mapPropertySource.getProperty("age"));//23
     }
 }
