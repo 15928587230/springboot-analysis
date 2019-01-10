@@ -1,7 +1,6 @@
 package owinfo.analysis._6ReflectGeneric.GenericTest;
 
 import org.springframework.core.ResolvableType;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import owinfo.analysis._6ReflectGeneric.ReflectTest;
 
