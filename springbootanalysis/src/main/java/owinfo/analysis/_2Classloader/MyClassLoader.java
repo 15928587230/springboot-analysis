@@ -3,6 +3,9 @@ package owinfo.analysis._2Classloader;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
+import java.net.URLClassLoader;
+import java.util.Arrays;
+
 /**
  * ClassLoader测试
  * @see org.springframework.util.ClassUtils
@@ -50,5 +53,8 @@ public class MyClassLoader extends ClassLoader {
         ClassLoader classLoader = new MyClassLoader();
         Class<?> arrayList = classLoader.loadClass(className);
         System.out.println(arrayList.newInstance());
+
+        URLClassLoader urlClassLoader = (URLClassLoader) URLClassLoader.getSystemClassLoader();
+        System.out.println(Arrays.toString(urlClassLoader.getURLs()));
     }
 }

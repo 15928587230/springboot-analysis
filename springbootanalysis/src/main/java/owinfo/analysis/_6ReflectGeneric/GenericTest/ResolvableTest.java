@@ -36,52 +36,81 @@ public class ResolvableTest<T extends ResolvableType, D extends ReflectTest> {
             System.out.println(type);
         }
 
-        ResolvableType[] generics1 = getGenerics(resolvableType1);
-        for (ResolvableType type: generics1) {
+        /**
+         *  自定义获取泛型的ResolvableType[]数组
+         */
+        ResolvableType[] resolvableTypes = resolveGenerics(resolvableType1);
+        for (ResolvableType type: resolvableTypes) {
             System.out.println(type);
         }
-
-        Class<?>[] classes = resolvableType1.resolveGenerics();
-        for (Class clazz: classes) {
-            System.out.println(clazz);
-        }
     }
+
 
     /**
-     * 自定义方法获取泛型的ResolvableType类型数组
-     * @param originType
+     * Class类型只会存在类型变量
+     * ParameterizedType 存在参数泛型中 包括通配符类型和类型变量
+     * TypeVariable 类或者参数中(如方法参数或者成员变量中)
+     * WildCard 参数泛型的参数中
+     * @param type
      * @return
      */
-    @Nullable
-    public static ResolvableType[] getGenerics(ResolvableType originType) {
-        Assert.notNull(originType, "ResolvableType can not be null");
-        ResolvableType[] resolvableTypes;
+    public static ResolvableType[] resolveGenerics(ResolvableType type) {
+        Assert.notNull(type, "ResolvableType can not be null");
+        Type origin = type.getType();
+        if (origin instanceof Class) {
+            /**
+             *  Class类型T、D, 类型变量进行解析
+             */
+            TypeVariable[] typeParameters = ((Class) origin).getTypeParameters();
+            int length = typeParameters.length;
+            ResolvableType[] resolvableTypes = new ResolvableType[length];
 
-        Type type = originType.getType();
-        if (type instanceof Class) {
-            TypeVariable[] typeVariables = ((Class) type).getTypeParameters();
-            resolvableTypes = new ResolvableType[typeVariables.length];
-            fillIn(resolvableTypes, typeVariables);
+            for (int i = 0; i < length; i++) {
+                resolvableTypes[i] = ResolvableType.forType(typeParameters[i]);
+            }
+            return resolvableTypes;
 
-        } else if (type instanceof ParameterizedType) {
+        } else if (type instanceof ParameterizedType){
+            /**
+             *  参数泛型 T，?(WildCard类型)
+             */
             Type[] typeArguments = ((ParameterizedType) type).getActualTypeArguments();
-            resolvableTypes = new ResolvableType[typeArguments.length];
+            int length = typeArguments.length;
+            ResolvableType[] resolvableTypes = new ResolvableType[length];
 
-            fillIn(resolvableTypes, typeArguments);
-        } else if (type instanceof GenericArrayType){
+            for (int i = 0; i < length; i++) {
+                if (typeArguments[i] instanceof WildcardType) {
+                    WildcardType wildcardType = (WildcardType)typeArguments[i];
+
+                    /**
+                     *  在不知道类型?的情况下获取边界
+                     */
+                    if (wildcardType.getLowerBounds()[0] == null) {
+                        resolvableTypes[i] = ResolvableType.forType(wildcardType.getUpperBounds()[0]);
+                    } else {
+                        resolvableTypes[i] = ResolvableType.forType(wildcardType.getLowerBounds()[0]);
+                    }
+                } else {
+                    resolvableTypes[i] = ResolvableType.forType(typeArguments[i]);
+                }
+            }
+            return resolvableTypes;
+
+        } else if (type instanceof GenericArrayType) {
+            /**
+             *  数组泛型
+             */
             Type componentType = ((GenericArrayType) type).getGenericComponentType();
-            resolvableTypes = new ResolvableType[1];
-            resolvableTypes[0] = ResolvableType.forType(componentType);
+            return new ResolvableType[] {ResolvableType.forType(componentType)};
+
+        } else if (type instanceof TypeVariable) {
+            /**
+             *  类型变量
+             */
+            return new ResolvableType[] {type};
 
         } else {
-            return null;
-        }
-        return resolvableTypes;
-    }
-
-    public static void fillIn(ResolvableType[] resolvableTypes, Type[] types) {
-        for (int i = 0; i < types.length; i++) {
-            resolvableTypes[i] = ResolvableType.forType(types[i]);
+            return new ResolvableType[] {ResolvableType.NONE};
         }
     }
 
