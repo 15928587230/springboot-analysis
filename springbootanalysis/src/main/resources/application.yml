@@ -1,2 +1,8 @@
 server:
   port: 8100
+
+spring:
+  banner:
+    location: classpath:banner/banner.txt
+  main:
+    banner-mode: console
