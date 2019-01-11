@@ -4,6 +4,7 @@ import org.springframework.boot.ansi.AnsiColor;
 import org.springframework.boot.ansi.AnsiElement;
 import org.springframework.boot.ansi.AnsiPropertySource;
 import org.springframework.boot.ansi.AnsiStyle;
+import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
@@ -37,6 +38,7 @@ public class AnsiPropertyTest {
      *      通过枚举初始化资源Map<String, Set<Enum>>
      *          获取传入属性对应的枚举列表(传入属性分为几部分)
      */
+    @Nullable
     public static Object getProperty(String name) {
         if (StringUtils.hasLength(name)) {
             Iterator<String> iterator = maps.keySet().iterator();

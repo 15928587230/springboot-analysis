@@ -106,8 +106,15 @@ public class InitialTest {
                 listeners.add((ApplicationListener) cort.newInstance());
             }
 
-            System.out.println(initializers);
-            System.out.println(listeners);
+            System.out.println("\n 需要加载的初始化器: ");
+            for (int i = 0; i < initializers.size(); i++) {
+                System.out.println(initializers.get(i));
+            }
+
+            System.out.println("需要加载的监听器: ");
+            for (int i = 0; i < listeners.size(); i++) {
+                System.out.println(listeners.get(i));
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

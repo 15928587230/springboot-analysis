@@ -5,7 +5,6 @@ import org.springframework.core.env.SimpleCommandLinePropertySource;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 /**
  * @see org.springframework.core.env.SimpleCommandLineArgsParser
