@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @see AbstractPropertyResolver
- * @see PropertySourcesPropertyResolver
+ * {@link AbstractPropertyResolver}
+ * {@link PropertySourcesPropertyResolver}
  */
 public class PropertySourcesPropertyResolverTest {
 

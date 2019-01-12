@@ -15,7 +15,13 @@ public class ResolvableTest<T extends ResolvableType, D extends ReflectTest> {
 
     private static ResolvableType[] resolvableTypes = new ResolvableType[0];
 
-    public static void main(String[] args) {
+    /**
+     * 获取WildCard类型，在获取其泛型类型(默认获取其上下边界类型)
+     * @param clazz
+     */
+    private void wildCardType(Class<? extends List> clazz) {}
+
+    public static void main(String[] args) throws NoSuchMethodException {
 
 
         /**
@@ -42,6 +48,21 @@ public class ResolvableTest<T extends ResolvableType, D extends ReflectTest> {
         for (ResolvableType type: resolvableTypes) {
             System.out.println(type);
         }
+
+        Method cardType = ResolvableTest.class.getDeclaredMethod("wildCardType", Class.class);
+        Type[] parameterTypes = cardType.getGenericParameterTypes();
+        Type typeArgument = ((ParameterizedType) parameterTypes[0]).getActualTypeArguments()[0];
+        System.out.println(typeArgument.getClass()); //WildCardImpl
+
+        /**
+         *  WildCard类型测试
+         */
+        ResolvableType wildcard = ResolvableType.forType(typeArgument);
+        ResolvableType[] resolveGenerics = resolveGenerics(wildcard);
+        System.out.println(resolveGenerics[0]);
+
+        ResolvableType[] generics1 = wildcard.getGenerics();
+        System.out.println(generics1[0]);
     }
 
 
@@ -106,8 +127,17 @@ public class ResolvableTest<T extends ResolvableType, D extends ReflectTest> {
             /**
              *  类型变量
              */
-            return new ResolvableType[] {type};
-
+            return new ResolvableType[]{type};
+        } else if (type instanceof WildcardType) {
+            WildcardType type1 = (WildcardType) type;
+            /**
+             *  在不知道类型?的情况下获取边界
+             */
+            if (type1.getLowerBounds()[0] == null) {
+                return new ResolvableType[] {ResolvableType.forType(type1.getUpperBounds()[0])};
+            } else {
+                return new ResolvableType[] {ResolvableType.forType(type1.getLowerBounds()[0])};
+            }
         } else {
             return new ResolvableType[] {ResolvableType.NONE};
         }
