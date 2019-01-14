@@ -10,13 +10,13 @@ import java.util.List;
  */
 public interface SpringEventRunner {
 
-    public void starting(SpringEventSource source);
+    void starting(SpringEventSource source);
 
-    public void prepare(SpringEventSource source);
+    void prepare(SpringEventSource source);
 
-    public void running(SpringEventSource source);
+    void running(SpringEventSource source);
 
-    public void closed(SpringEventSource source);
+    void closed(SpringEventSource source);
 }
 
 class SimpleSpringEventRunner implements SpringEventRunner {
