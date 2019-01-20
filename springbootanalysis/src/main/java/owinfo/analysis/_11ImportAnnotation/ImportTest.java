@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -17,6 +19,7 @@ import javax.annotation.Resource;
  * @see org.springframework.beans.factory.config.BeanFactoryPostProcessor
  * @see org.springframework.beans.factory.config.BeanPostProcessor
  */
+@EnableScheduling
 @Import(User.class)
 @Component
 public class ImportTest implements CommandLineRunner {
@@ -38,6 +41,11 @@ public class ImportTest implements CommandLineRunner {
         System.out.println(bean);
 
         System.out.println(user);
+    }
+
+    @Scheduled(cron = "* * * * * *")
+    public void schedule() {
+        System.out.println("呵呵");
     }
 }
 
