@@ -13,5 +13,4 @@
 - ConverterRegistry体系
 - FormatterRegistry体系
 
-<font color="red">hello world</font>
 
