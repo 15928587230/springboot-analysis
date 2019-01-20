@@ -6,7 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class ConditionalTest {
 
     /**
-     *@Conditional注解测试
+     * @Conditional 注解测试
      */
     @Test
     public void conditionalTest() {
