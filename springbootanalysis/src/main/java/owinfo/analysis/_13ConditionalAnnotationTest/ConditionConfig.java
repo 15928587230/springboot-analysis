@@ -10,15 +10,18 @@ import java.util.LinkedList;
 @Configuration
 public class ConditionConfig {
 
+    /**
+     * @Bean 注入容器，beanName是方法名getArrayList
+     */
     @Conditional(WindowsConfig.class)
     @Bean
-    public ArrayList arrayList() {
+    public ArrayList getArrayList() {
         return new ArrayList();
     }
 
     @Conditional(LinuxConfig.class)
     @Bean
-    public LinkedList linkedList() {
+    public LinkedList getLinkedList() {
         return new LinkedList();
     }
 }
