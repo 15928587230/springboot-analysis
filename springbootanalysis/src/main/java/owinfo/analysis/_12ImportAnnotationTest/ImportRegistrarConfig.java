@@ -10,7 +10,7 @@ import java.util.HashMap;
 /**
  * 手动注入Bean并指定名字
  */
-public class ImportRegistrarClazz implements ImportBeanDefinitionRegistrar{
+public class ImportRegistrarConfig implements ImportBeanDefinitionRegistrar{
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata,
                                         BeanDefinitionRegistry registry) {

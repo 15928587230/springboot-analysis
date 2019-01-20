@@ -11,7 +11,7 @@ public class ImportAnalysisTest {
     @Test
     public void testImport() {
         AnnotationConfigApplicationContext context
-                = new AnnotationConfigApplicationContext(ImportAnnotation.class);
+                = new AnnotationConfigApplicationContext(ImportAnnotationConfig.class);
         String[] namesForType = context.getBeanDefinitionNames();
         for (String name: namesForType) {
                 System.out.println("beanName: " + name + ", instance: " + context.getBean(name));

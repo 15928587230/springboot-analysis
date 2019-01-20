@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  *  Import注入Bean到容器中的三种方式
  */
-@Import({ArrayList.class, ImportSelectorClazz.class, ImportRegistrarClazz.class})
+@Import({ArrayList.class, ImportSelectorConfig.class, ImportRegistrarConfig.class})
 @Configuration
-public class ImportAnnotation {
+public class ImportAnnotationConfig {
 }
