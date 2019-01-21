@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 
 /**
  * IOC初始化流程，beanFactoryPostProcessor工厂后置器执行ConfigurationClassPostProcessor扫描解析相关注解
@@ -20,9 +21,12 @@ import javax.annotation.Resource;
  * @see org.springframework.beans.factory.config.BeanPostProcessor
  */
 @EnableScheduling
-@Import(User.class)
+@Import({User.class, ArrayList.class})
 @Component
 public class ImportTest implements CommandLineRunner {
+
+    @Resource
+    private ArrayList arrayList;
 
     @Resource
     private User user;
@@ -41,6 +45,8 @@ public class ImportTest implements CommandLineRunner {
         System.out.println(bean);
 
         System.out.println(user);
+
+        System.out.println(arrayList);
     }
 
     @Scheduled(cron = "* * * * * *")
