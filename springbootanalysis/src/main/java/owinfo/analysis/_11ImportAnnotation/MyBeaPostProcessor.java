@@ -11,30 +11,30 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyBeaPostProcessor implements BeanPostProcessor, ApplicationContextAware, ApplicationEventPublisherAware {
 
-    private ApplicationContext applicationContext;
+	private ApplicationContext applicationContext;
 
-    @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        return bean;
-    }
+	@Override
+	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+		return bean;
+	}
 
-    @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if (bean instanceof User) {
-            User user = (User) bean;
-            user.setAge(23);
-            user.setUserName("pjj");
-        }
-        return bean;
-    }
+	@Override
+	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+		if (bean instanceof User) {
+			User user = (User) bean;
+			user.setAge(23);
+			user.setUserName("pjj");
+		}
+		return bean;
+	}
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
+	}
 
-    @Override
-    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-        applicationEventPublisher.publishEvent(new MyEvent(new Object()));
-    }
+	@Override
+	public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+		applicationEventPublisher.publishEvent(new MyEvent(new Object()));
+	}
 }

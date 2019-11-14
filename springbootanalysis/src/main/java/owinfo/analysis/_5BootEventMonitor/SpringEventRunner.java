@@ -10,42 +10,42 @@ import java.util.List;
  */
 public interface SpringEventRunner {
 
-    void starting(SpringEventSource source);
+	void starting(SpringEventSource source);
 
-    void prepare(SpringEventSource source);
+	void prepare(SpringEventSource source);
 
-    void running(SpringEventSource source);
+	void running(SpringEventSource source);
 
-    void closed(SpringEventSource source);
+	void closed(SpringEventSource source);
 }
 
 class SimpleSpringEventRunner implements SpringEventRunner {
 
-    private Logger logger;
-    private SimpleEventMulticaster mutilcaster;
+	private Logger logger;
+	private SimpleEventMulticaster mutilcaster;
 
-    public SimpleSpringEventRunner(Logger logger, List<SpringListener> listeners) {
-        this.logger = logger;
-        mutilcaster = new SimpleEventMulticaster(logger, listeners);
-    }
+	public SimpleSpringEventRunner(Logger logger, List<SpringListener> listeners) {
+		this.logger = logger;
+		mutilcaster = new SimpleEventMulticaster(logger, listeners);
+	}
 
-    @Override
-    public void starting(SpringEventSource source) {
-        this.mutilcaster.multicaster(new SpringStartingEvent(source));
-    }
+	@Override
+	public void starting(SpringEventSource source) {
+		this.mutilcaster.multicaster(new SpringStartingEvent(source));
+	}
 
-    @Override
-    public void prepare(SpringEventSource source) {
-        this.mutilcaster.multicaster(new SpringPrepareEvent(source));
-    }
+	@Override
+	public void prepare(SpringEventSource source) {
+		this.mutilcaster.multicaster(new SpringPrepareEvent(source));
+	}
 
-    @Override
-    public void running(SpringEventSource source) {
-        this.mutilcaster.multicaster(new SpringRunningEvent(source));
-    }
+	@Override
+	public void running(SpringEventSource source) {
+		this.mutilcaster.multicaster(new SpringRunningEvent(source));
+	}
 
-    @Override
-    public void closed(SpringEventSource source) {
-        this.mutilcaster.multicaster(new SpringClosedEvent(source));
-    }
+	@Override
+	public void closed(SpringEventSource source) {
+		this.mutilcaster.multicaster(new SpringClosedEvent(source));
+	}
 }

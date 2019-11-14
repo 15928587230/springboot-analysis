@@ -10,10 +10,10 @@ import java.util.HashMap;
 /**
  * 手动注入Bean并指定名字
  */
-public class ImportRegistrarConfig implements ImportBeanDefinitionRegistrar{
-    @Override
-    public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata,
-                                        BeanDefinitionRegistry registry) {
-        registry.registerBeanDefinition("hashMap", new RootBeanDefinition(HashMap.class));
-    }
+public class ImportRegistrarConfig implements ImportBeanDefinitionRegistrar {
+	@Override
+	public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata,
+	                                    BeanDefinitionRegistry registry) {
+		registry.registerBeanDefinition("hashMap", new RootBeanDefinition(HashMap.class));
+	}
 }

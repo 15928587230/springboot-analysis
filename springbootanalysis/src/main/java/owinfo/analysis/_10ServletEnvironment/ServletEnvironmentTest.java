@@ -7,10 +7,11 @@ import org.springframework.core.env.StandardEnvironment;
 
 /**
  * Environment结构 初始化StandardServletEnvironment。
- *  包括activeProfiles、defaultProfiles、converters、propertySources、systemProperties等等
- *
+ * 包括activeProfiles、defaultProfiles、converters、propertySources、systemProperties等等
+ * <p>
  * 上面涉及到的环境初始化，是用下面的API结构体系来解析完成的
  *
+ * @author Mr.peng
  * @see org.springframework.core.env.Environment
  * @see org.springframework.core.env.ConfigurableEnvironment
  * @see AbstractEnvironment
@@ -21,20 +22,19 @@ import org.springframework.core.env.StandardEnvironment;
  * @see org.springframework.boot.autoconfigure.web.servlet.MultipartProperties
  * @see org.springframework.core.env.PropertySource
  * @see org.springframework.core.env.PropertyResolver
- * @author Mr.peng
  */
 public class ServletEnvironmentTest {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-        /**
-         *  初始化PropertyResolver。systemProperties。systemEnvironment。resolverHelper等等。
-         */
-        AbstractEnvironment abstractEnvironment = new StandardEnvironment();
-        /**
-         *  直接初始化ConversionService转换服务，默认添加132个Converter
-         */
-        abstractEnvironment.setConversionService((ConfigurableConversionService)
-                ApplicationConversionService.getSharedInstance());
-    }
+		/**
+		 *  初始化PropertyResolver。systemProperties。systemEnvironment。resolverHelper等等。
+		 */
+		AbstractEnvironment abstractEnvironment = new StandardEnvironment();
+		/**
+		 *  直接初始化ConversionService转换服务，默认添加132个Converter
+		 */
+		abstractEnvironment.setConversionService((ConfigurableConversionService)
+				ApplicationConversionService.getSharedInstance());
+	}
 }

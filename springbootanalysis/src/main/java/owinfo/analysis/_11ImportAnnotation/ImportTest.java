@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 /**
  * IOC初始化流程，beanFactoryPostProcessor工厂后置器执行ConfigurationClassPostProcessor扫描解析相关注解
+ *
  * @see org.springframework.context.annotation.ConfigurationClassParser
  * @see org.springframework.context.annotation.ConfigurationClassPostProcessor
  * @see org.springframework.beans.factory.config.BeanDefinition
@@ -25,33 +26,33 @@ import java.util.ArrayList;
 @Component
 public class ImportTest implements CommandLineRunner {
 
-    @Resource
-    private ArrayList arrayList;
+	@Resource
+	private ArrayList arrayList;
 
-    @Resource
-    private User user;
+	@Resource
+	private User user;
 
-    @Autowired
-    private DefaultListableBeanFactory beanFactory;
+	@Autowired
+	private DefaultListableBeanFactory beanFactory;
 
-    @Override
-    public void run(String... args) {
-        String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
-        for (String beanName: beanDefinitionNames) {
-            System.out.println(beanName);
-        }
+	@Override
+	public void run(String... args) {
+		String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
+		for (String beanName : beanDefinitionNames) {
+			System.out.println(beanName);
+		}
 
-        User bean = beanFactory.getBean("owinfo.analysis._11ImportAnnotation.User", User.class);
-        System.out.println(bean);
+		User bean = beanFactory.getBean("owinfo.analysis._11ImportAnnotation.User", User.class);
+		System.out.println(bean);
 
-        System.out.println(user);
+		System.out.println(user);
 
-        System.out.println(arrayList);
-    }
+		System.out.println(arrayList);
+	}
 
-    @Scheduled(cron = "* * * * * *")
-    public void schedule() {
-        System.out.println("呵呵");
-    }
+	@Scheduled(cron = "* * * * * *")
+	public void schedule() {
+		System.out.println("呵呵");
+	}
 }
 

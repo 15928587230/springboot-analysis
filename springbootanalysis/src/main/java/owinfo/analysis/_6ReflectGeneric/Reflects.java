@@ -6,5 +6,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Reflects {
-    Reflect[] reflect();
+	Reflect[] reflect();
 }

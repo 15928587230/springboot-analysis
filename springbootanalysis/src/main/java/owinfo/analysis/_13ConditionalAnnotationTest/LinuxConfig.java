@@ -11,13 +11,13 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
  */
 public class LinuxConfig implements Condition {
 
-    @Override
-    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        String property = System.getProperty("os.name");
-        System.out.println(property);
-        if (property.contains("Linux")) {
-            return true;
-        }
-        return false;
-    }
+	@Override
+	public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+		String property = System.getProperty("os.name");
+		System.out.println(property);
+		if (property.contains("Linux")) {
+			return true;
+		}
+		return false;
+	}
 }
